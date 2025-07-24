@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Te Amo, Mariana</title>
+  <style>
+    body { background: #fff0f5; font-family: Arial, sans-serif; text-align: center; padding: 40px; }
+    h1, h2 { color: #d10076; animation: pulseText 2s infinite; }
+    @keyframes pulseText { 0%,100%{opacity:1;} 50%{opacity:.5;} }
+    .heart { width:100px;height:90px;position:relative;margin:20px auto;animation:heartbeat 1s infinite; }
+    .heart::before, .heart::after {
+      content:"";position:absolute;width:100px;height:90px;background:red;
+      border-radius:50px 50px 0 0;top:0;
+    }
+    .heart::before { left:50px;transform:rotate(-45deg);transform-origin:0 100%; }
+    .heart::after { left:0;transform:rotate(45deg);transform-origin:100% 100%; }
+    @keyframes heartbeat { 0%{transform:scale(1);}25%{transform:scale(1.1);}50%{transform:scale(1);}75%{transform:scale(1.1);}100%{transform:scale(1);} }
+    #fotos { position:relative;width:300px;height:300px;margin:30px auto; }
+    .foto { position:absolute;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease-in-out;border-radius:20px;box-shadow:0 0 15px #d6008f; }
+    .foto.visible { opacity:1; }
+    audio { margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <h1>Te Amo</h1>
+  <div class="heart"></div>
+  <h2>Mariana 💖</h2>
+  <div id="fotos">
+    <img src="foto1.jpg" class="foto visible">
+    <img src="foto2.jpg" class="foto">
+    <img src="foto3.jpg" class="foto">
+  </div>
+  <audio controls autoplay loop>
+    <source src="cancion.mp3" type="audio/mpeg">Tu navegador no soporta audio.
+  </audio>
+  <script>
+    let index = 0;
+    const fotos = document.querySelectorAll(".foto");
+    setInterval(() => {
+      fotos[index].classList.remove("visible");
+      index = (index + 1) % fotos.length;
+      fotos[index].classList.add("visible");
+    }, 3000);
+  </script>
+</body>
+</html>
